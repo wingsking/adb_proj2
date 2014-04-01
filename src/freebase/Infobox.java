@@ -22,12 +22,14 @@ import org.json.simple.parser.ParseException;
 import type.*;
 
 public class Infobox {
-	  private static final String API_KEY = "AIzaSyBR42GcexpI2tIyn1WkZ4Ctp-kY61JUcA4";
+	  private static final String API_KEY = proj2.API_KEY;//"AIzaSyBR42GcexpI2tIyn1WkZ4Ctp-kY61JUcA4";
 	  private HashMap<String, Boolean> entityTypes = new HashMap<String, Boolean>();
 	  private JSONObject topic;
 	  private String meta;
+	  private String query;
 	  
 	  public Infobox(String query) throws IOException, ParseException {
+		  this.query = query;
 		  JSONArray results = freebaseSearch(query);
 		  freebaseTopic(results);
 	  }
@@ -53,7 +55,8 @@ public class Infobox {
 		  HttpTransport httpTransport = new NetHttpTransport();
 		  HttpRequestFactory requestFactory = httpTransport.createRequestFactory();
 		  JSONParser parser = new JSONParser();
-
+		  
+		  int count = 0; //counting how many topics are searched
 		  for (Object result:results) { 
 			  String topicId = JsonPath.read(result, "$.mid").toString();
 			  GenericUrl url = new GenericUrl("https://www.googleapis.com/freebase/v1/topic" + topicId);
@@ -70,6 +73,12 @@ public class Infobox {
 				  this.entityTypes = entityTypes;
 				  break;
 			  }	  
+			  
+			  if (this.topic == null) {
+				  count++;
+				  if (count % 5 == 0)
+					  System.out.println(count + " Search API result entries are searched. None of them of a supported type.");
+			  }
 		  }
 	  }
 	  
@@ -103,8 +112,10 @@ public class Infobox {
 	  
 	  //print all matching types
 	  public void printAll() {
-		  if (this.topic == null)
+		  if (this.topic == null) {
+			  System.out.println("No related information about query [" + query + "] was found!");
 			  return;
+		  }
 		  
 		  StringBuilder sb = new StringBuilder();
 		  sb.append(" (");

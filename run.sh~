@@ -1,0 +1,6 @@
+#!/bin/bash
+mkdir -p bin
+CP1="src:libs/*"
+CP2="bin:libs/*"
+javac -d bin/ -cp $CP1 src/*/*.java
+java -cp $CP2  freebase.proj2 $1 "$2"

@@ -20,15 +20,22 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.jayway.jsonpath.JsonPath;
 
 public class Question {
-	private static final String API_KEY = "AIzaSyBR42GcexpI2tIyn1WkZ4Ctp-kY61JUcA4";
+	private static final String API_KEY=proj2.API_KEY;
 	private ArrayList<QuestionResult> results = new ArrayList<QuestionResult>();
 	private String object;
 	
 	public Question(String query) throws IOException, ParseException {
 		String object = genObject(query);
 		//if object cannot be found (not valid input), return
-		if (object == null)
+		if (object == null) {
+			System.out.println("Wrong question!!!");
 			return;
+		}
+		this.object = object;
+		freebaseMQLRead(this.object);
+	}
+	
+	public Question(String object, boolean mode) throws IOException, ParseException {
 		this.object = object;
 		freebaseMQLRead(this.object);
 	}
@@ -36,10 +43,10 @@ public class Question {
 	//get the object from query
 	private String genObject (String query) {
 		query = query.toLowerCase();
-		if (!query.startsWith("who created ")){
-			System.out.print("Wrong question!!!");
+		
+		if (!query.startsWith("who created "))
 			return null;
-		}
+			
 		return query.substring(11).trim();
 	}
 	
