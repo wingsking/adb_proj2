@@ -10,7 +10,7 @@ import org.json.simple.parser.ParseException;
 
 
 public class proj2 {
-	public static String API_KEY;	//	
+	public static String API_KEY;	//"AIzaSyBR42GcexpI2tIyn1WkZ4Ctp-kY61JUcA4";
 	
 	public static void main(String[] args) throws IOException, ParseException {
 		API_KEY = args[0]; 

@@ -1,0 +1,9 @@
+all: compile run
+run:	run.sh
+	chmod 755 run.sh
+compile: compile.sh
+	chmod 755 compile.sh
+	./compile.sh
+clean:
+	rm -r bin
+

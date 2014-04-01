@@ -22,7 +22,7 @@ import org.json.simple.parser.ParseException;
 import type.*;
 
 public class Infobox {
-	  private static final String API_KEY = proj2.API_KEY;//"AIzaSyBR42GcexpI2tIyn1WkZ4Ctp-kY61JUcA4";
+	  private static final String API_KEY = proj2.API_KEY;
 	  private HashMap<String, Boolean> entityTypes = new HashMap<String, Boolean>();
 	  private JSONObject topic;
 	  private String meta;
