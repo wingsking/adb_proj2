@@ -143,8 +143,6 @@ public class Infobox {
 			  print("BusinessPerson");
 		  
 		  Print.printHyphen();
-		  System.out.println();
-		  System.out.println();
 		
 	  }
 	  

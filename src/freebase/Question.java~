@@ -83,8 +83,6 @@ public class Question {
 		}
 		
 		Print.printHyphen();
-		System.out.println();
-		System.out.println();
 		
 	}
 	

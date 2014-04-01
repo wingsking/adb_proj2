@@ -1,4 +1,4 @@
-all: run
+all: compile run
 run:	run.sh
 	chmod 755 run.sh
 compile: compile.sh

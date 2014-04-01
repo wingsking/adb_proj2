@@ -1,14 +1,8 @@
 #!/bin/bash
 #
-#
-# compile to directory called "bin"
-mkdir -p bin
-CP1="src:libs/*"
+#classpath for .class
 CP2="bin:libs/*"
-javac -d bin/ -cp $CP1 src/*/*.java
 
-#
-#
 help_info()
 {
   echo "Usage:" 
@@ -42,21 +36,23 @@ do
   esac
 done
 
+echo "$file"
+
 # a single query
 if [ "$key" != "" -a "$query" != "" -a "$file" = "" -a "$method" != "" ]
 then
-  java -cp $CP2  freebase.proj2 $2 "$4"
+  java -cp $CP2  freebase.proj2 "$key" "$query" "$method"
 # a file of queries
 elif [ "$key" != "" -a "$query" = "" -a "$file" != "" -a "$method" != "" ]
 then
   while read LINE
   do
-    java -cp $CP2 freebase.proj2 $2 "$LINE" $method
+    java -cp $CP2 freebase.proj2 "$key" "$query" "$method"
   done < $file
 # iteratively 
 elif [ "$key" != "" -a "$query" = "" -a "$file" = "" -a "$method" = "" ]
 then
-  java -cp $CP2 freebase.proj2 $2
+  java -cp $CP2 freebase.proj2 "$key"
 else
   help_info
 fi

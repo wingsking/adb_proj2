@@ -1,6 +1,8 @@
 #!/bin/bash
 #
-#
+#classpath for .class
+CP2="bin:libs/*"
+
 help_info()
 {
   echo "Usage:" 
@@ -37,18 +39,18 @@ done
 # a single query
 if [ "$key" != "" -a "$query" != "" -a "$file" = "" -a "$method" != "" ]
 then
-  java -cp $CP2  freebase.proj2 $2 "$4"
+  java -cp $CP2  freebase.proj2 "$key" "$query" "$method"
 # a file of queries
 elif [ "$key" != "" -a "$query" = "" -a "$file" != "" -a "$method" != "" ]
 then
   while read LINE
   do
-    java -cp $CP2 freebase.proj2 $2 "$LINE" $method
+    java -cp $CP2 freebase.proj2 "$key" "$LINE" "$method"
   done < $file
 # iteratively 
 elif [ "$key" != "" -a "$query" = "" -a "$file" = "" -a "$method" = "" ]
 then
-  java -cp $CP2 freebase.proj2 $2
+  java -cp $CP2 freebase.proj2 "$key"
 else
   help_info
 fi

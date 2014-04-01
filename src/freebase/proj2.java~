@@ -18,14 +18,13 @@ public class proj2 {
 		//if args includes more than just API_KEY
 		if (args.length > 1) {
 			String query = args[1]; //"who created microsoft";
+			System.out.println("Query-Question: " + query);
 			String method = args[2];
 			
 			if (method.equals("infobox")) {
-				System.out.println("Query-Infobox: " + query);
 				Infobox box = new Infobox(query);
 				box.printAll();
 			} else if (method.equals("question")) {
-				System.out.println("Query-Question: " + query);
 				Question q = new Question(query);
 				q.printInfobox();
 			}
